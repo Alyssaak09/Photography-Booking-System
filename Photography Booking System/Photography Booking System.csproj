@@ -1,0 +1,79 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aspnet-Photography_Booking_System-ff39595e-6227-4ab2-be82-806fc8a54316</UserSecretsId>
+    <RootNamespace>Photography_Booking_System</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" />
+    <Compile Include="obj\Debug\net8.0\Photography Booking System.AssemblyInfo.cs" />
+    <Compile Include="obj\Debug\net8.0\Photography Booking System.GlobalUsings.g.cs" />
+    <Compile Include="obj\Debug\net8.0\Photography Booking System.RazorAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="obj\Debug\net8.0\ApiEndpoints.json" />
+    <Content Include="obj\Debug\net8.0\Photography Booking System.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\net8.0\staticwebassets.references.upToDateCheck.txt" />
+    <Content Include="obj\Debug\net8.0\staticwebassets.removed.txt" />
+    <Content Include="obj\Photography Booking System.csproj.nuget.dgspec.json" />
+    <Content Include="obj\project.assets.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.13" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.13" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.13" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="8.1.4" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="8.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="bin\Debug\net8.0\cs\" />
+    <Folder Include="bin\Debug\net8.0\de\" />
+    <Folder Include="bin\Debug\net8.0\es\" />
+    <Folder Include="bin\Debug\net8.0\fr\" />
+    <Folder Include="bin\Debug\net8.0\it\" />
+    <Folder Include="bin\Debug\net8.0\ja\" />
+    <Folder Include="bin\Debug\net8.0\ko\" />
+    <Folder Include="bin\Debug\net8.0\pl\" />
+    <Folder Include="bin\Debug\net8.0\pt-BR\" />
+    <Folder Include="bin\Debug\net8.0\runtimes\unix\lib\net6.0\" />
+    <Folder Include="bin\Debug\net8.0\runtimes\win-arm64\native\" />
+    <Folder Include="bin\Debug\net8.0\runtimes\win-arm\native\" />
+    <Folder Include="bin\Debug\net8.0\runtimes\win-x64\native\" />
+    <Folder Include="bin\Debug\net8.0\runtimes\win-x86\native\" />
+    <Folder Include="bin\Debug\net8.0\runtimes\win\lib\net6.0\" />
+    <Folder Include="bin\Debug\net8.0\ru\" />
+    <Folder Include="bin\Debug\net8.0\tr\" />
+    <Folder Include="bin\Debug\net8.0\zh-Hans\" />
+    <Folder Include="bin\Debug\net8.0\zh-Hant\" />
+    <Folder Include="Data\Migrations\" />
+    <Folder Include="obj\Debug\net8.0\refint\" />
+    <Folder Include="obj\Debug\net8.0\ref\" />
+    <Folder Include="obj\Debug\net8.0\scopedcss\bundle\" />
+    <Folder Include="obj\Debug\net8.0\scopedcss\projectbundle\" />
+    <Folder Include="obj\Debug\net8.0\scopedcss\Views\Shared\" />
+    <Folder Include="obj\Debug\net8.0\staticwebassets\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="obj\Debug\net8.0\apphost.exe" />
+    <None Include="obj\Debug\net8.0\Photography Booking System.AssemblyInfoInputs.cache" />
+    <None Include="obj\Debug\net8.0\Photography Booking System.assets.cache" />
+    <None Include="obj\Debug\net8.0\Photography Booking System.csproj.AssemblyReference.cache" />
+    <None Include="obj\Debug\net8.0\Photography Booking System.csproj.BuildWithSkipAnalyzers" />
+    <None Include="obj\Debug\net8.0\Photography Booking System.GeneratedMSBuildEditorConfig.editorconfig" />
+    <None Include="obj\Debug\net8.0\Photography Booking System.RazorAssemblyInfo.cache" />
+    <None Include="obj\Photography Booking System.csproj.nuget.g.props" />
+    <None Include="obj\Photography Booking System.csproj.nuget.g.targets" />
+  </ItemGroup>
+
+</Project>
