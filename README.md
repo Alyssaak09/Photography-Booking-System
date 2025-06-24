@@ -29,7 +29,7 @@ All follow RESTful naming conventions for clarity and ease of testing/documentat
   * Optional: api/Clients/{id}/Bookings for client-specific bookings
   * 1-to-many relationship: 1 Client → Many Bookings
  
-  - BookingsController
+- BookingsController
   * Core logic for booking management
   * Manages booking-to-service relationships (many-to-many)
   * Returns BookingDto with all related details
