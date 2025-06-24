@@ -13,7 +13,7 @@ namespace Photography_Booking_System.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20250602192159_fullmigration")]
-    partial class fullmigration
+    partial class Fullmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

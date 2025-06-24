@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Photography_Booking_System.Models.ViewModels.BookingSummaryViewModel>
+
+@{
+    ViewData["Title"] = "Bookings";
+}
+
+<h2>Bookings</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Booking</a>
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Client</th>
+            <th>Photographer</th>
+            <th>Service Count</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.BookingDate.ToString("yyyy-MM-dd")</td>
+                <td>@item.Location</td>
+                <td>@item.ClientName</td>
+                <td>@item.PhotographerName</td>
+                <td>@item.ServiceCount</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.BookingId">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@item.BookingId">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.BookingId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

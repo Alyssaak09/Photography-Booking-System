@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Photography_Booking_System.Migrations
 {
     /// <inheritdoc />
-    public partial class fullmigration : Migration
+    public partial class Fullmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

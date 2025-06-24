@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Photography_Booking_System.Models.Photographer>
+@{
+    ViewData["Title"] = "Photographers";
+}
+
+<h2>Photographers</h2>
+<p>
+    <a asp-action="Create" class="btn btn-primary">Add New Photographer</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Specialty</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Specialty</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.PhotographerId">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@item.PhotographerId">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PhotographerId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

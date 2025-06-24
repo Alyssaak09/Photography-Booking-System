@@ -1,0 +1,26 @@
+﻿@model Photography_Booking_System.Models.ViewModels.BookingServiceViewModel
+
+@{
+    ViewData["Title"] = "Create Booking Service";
+}
+
+<h1>Create Booking Service</h1>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="BookingId"></label>
+        <select asp-for="BookingId" asp-items="Model.Bookings" class="form-control"></select>
+        <span asp-validation-for="BookingId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ServiceId"></label>
+        <select asp-for="ServiceId" asp-items="Model.Services" class="form-control"></select>
+        <span asp-validation-for="ServiceId" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button> |
+    <a asp-action="Index">Back to List</a>
+</form>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

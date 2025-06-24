@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Photography_Booking_System.Models.Client>
+
+@{
+    ViewData["Title"] = "Clients";
+}
+
+<h2>Clients</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Client</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var client in Model)
+        {
+            <tr>
+                <td>@client.Name</td>
+                <td>@client.Email</td>
+                <td>@client.PhoneNumber</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@client.ClientId">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@client.ClientId">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@client.ClientId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

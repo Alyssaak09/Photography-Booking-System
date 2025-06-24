@@ -1,0 +1,23 @@
+﻿@model Photography_Booking_System.Models.Photographer
+@{
+    ViewData["Title"] = "Edit Photographer";
+}
+
+<h2>Edit Photographer</h2>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="PhotographerId" />
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Specialty"></label>
+        <input asp-for="Specialty" class="form-control" />
+        <span asp-validation-for="Specialty" class="text-danger" />
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+

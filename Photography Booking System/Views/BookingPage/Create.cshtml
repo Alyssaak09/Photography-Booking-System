@@ -1,0 +1,55 @@
+﻿@model Photography_Booking_System.Models.ViewModels.BookingFormViewModel
+
+@{
+    ViewData["Title"] = "Create Booking";
+}
+
+<h2>Create Booking</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="BookingDate"></label>
+        <input asp-for="BookingDate" type="date" class="form-control" />
+        <span asp-validation-for="BookingDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Location"></label>
+        <input asp-for="Location" class="form-control" />
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ClientId">Client</label>
+        <select asp-for="ClientId" class="form-control" asp-items="@(new SelectList(Model.Clients, "ClientId", "Name"))">
+            <option value="">Select Client</option>
+        </select>
+        <span asp-validation-for="ClientId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PhotographerId">Photographer</label>
+        <select asp-for="PhotographerId" class="form-control" asp-items="@(new SelectList(Model.Photographers, "PhotographerId", "Name"))">
+            <option value="">Select Photographer</option>
+        </select>
+        <span asp-validation-for="PhotographerId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Services</label><br />
+        @foreach (var service in Model.Services)
+        {
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="SelectedServiceIds" value="@service.ServiceId" />
+                <label class="form-check-label">@($"{service.Name} (${service.Price:N2})")</label>
+            </div>
+        }
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</form>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Photography_Booking_System.Models.ViewModels.BookingSummaryViewModel>
+
+@{
+    ViewData["Title"] = "Bookings by Photographer";
+    var photographerName = ViewData["PhotographerName"] as string ?? "Selected Photographer";
+}
+
+<h2>Bookings for @photographerName</h2>
+
+<!-- Navigation Buttons -->
+<div class="mb-3">
+    <a class="btn btn-primary" asp-action="Index" asp-controller="BookingPage" title="View all bookings">All Bookings</a>
+    <a class="btn btn-secondary" asp-action="ByService" asp-controller="BookingPage" asp-route-serviceId="1" title="View example bookings by service">View Bookings by Service (Example)</a>
+    <a class="btn btn-outline-secondary" asp-controller="Home" asp-action="Index" title="Go to Home page">Home</a>
+</div>
+
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Booking ID</th>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Client</th>
+            <th>Photographer</th>
+            <th>Number of Services</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var booking in Model)
+            {
+                <tr>
+                    <td>@booking.BookingId</td>
+                    <td>@booking.BookingDate.ToShortDateString()</td>
+                    <td>@booking.Location</td>
+                    <td>@booking.ClientName</td>
+                    <td>@booking.PhotographerName</td>
+                    <td>@booking.ServiceCount</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6" class="text-center text-muted">No bookings found for this photographer.</td>
+            </tr>
+        }
+    </tbody>
+</table>

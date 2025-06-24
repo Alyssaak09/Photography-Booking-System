@@ -146,15 +146,52 @@ namespace Photography_Booking_System.Controllers
         }
 
         /// <summary>
+        /// Lists bookings associated with a specific service.
+        /// </summary>
+        /// <example>
+        /// GET http://localhost:7198/api/Services/ListBookingsByService/2
+        /// </example>
+        /// <param name="serviceId">ID of the service.</param>
+        /// <returns>
+        /// A list of BookingSummaryDTO objects for bookings related to the specified service.
+        /// </returns>
+        [HttpGet("ListBookingsByService/{serviceId}")]
+        public async Task<ActionResult<IEnumerable<BookingSummaryDTO>>> ListBookingsByService(int serviceId)
+        {
+            var bookings = await _context.Booking_Services
+                .Where(bs => bs.ServiceId == serviceId
+                             && bs.Booking != null
+                             && bs.Booking.Client != null
+                             && bs.Booking.Photographer != null)
+                .Include(bs => bs.Booking)
+                    .ThenInclude(b => b.Client)
+                .Include(bs => bs.Booking)
+                    .ThenInclude(b => b.Photographer)
+               
+                .Select(bs => new BookingSummaryDTO
+                {
+                    BookingId = bs.Booking.BookingId,
+                    BookingDate = bs.Booking.BookingDate,
+                    Location = bs.Booking.Location ?? string.Empty,
+                    ClientName = bs.Booking.Client.Name,
+                    PhotographerName = bs.Booking.Photographer.Name,
+                    ServiceCount = bs.Booking.BookingServices.Count() 
+                })
+                .ToListAsync();
+
+            return Ok(bookings);
+        }
+
+
+        /// <summary>
         /// Checks whether a service exists by ID.
         /// </summary>
         /// <param name="id">Service ID</param>
-        /// <returns>
-        /// True if the service exists, false otherwise.
-        /// </returns>
+        /// <returns>True if the service exists, false otherwise.</returns>
         private bool ServiceExists(int id)
         {
             return _context.Services.Any(e => e.ServiceId == id);
         }
     }
 }
+

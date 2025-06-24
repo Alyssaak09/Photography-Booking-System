@@ -32,7 +32,7 @@ namespace Photography_Booking_System.Controllers
         /// A list of BookingDTO objects with related client, photographer, and service information.
         /// </returns>
         [HttpGet("List")]
-        public async Task<ActionResult<IEnumerable<BookingDTO>>> ListBookings()
+        public async Task<ActionResult<IEnumerable<BookingSummaryDTO>>> ListBookings()
         {
             var bookings = await _context.Bookings
                 .Include(b => b.Client)
@@ -41,24 +41,17 @@ namespace Photography_Booking_System.Controllers
                     .ThenInclude(bs => bs.Service)
                 .ToListAsync();
 
-            var bookingDtos = bookings.Select(b => new BookingDTO
+            var bookingSummaries = bookings.Select(b => new BookingSummaryDTO
             {
                 BookingId = b.BookingId,
                 BookingDate = b.BookingDate,
-                Location = b.Location,
-                ClientId = b.ClientId,
-                ClientName = b.Client.Name,
-                PhotographerId = b.PhotographerId,
-                PhotographerName = b.Photographer.Name,
-                Services = b.BookingServices.Select(bs => new ServiceDTO
-                {
-                    ServiceId = bs.ServiceId,
-                    Name = bs.Service.Name,
-                    Price = bs.Service.Price
-                }).ToList()
+                Location = b.Location ?? string.Empty,
+                ClientName = b.Client?.Name ?? "Unknown Client",
+                PhotographerName = b.Photographer?.Name ?? "Unknown Photographer",
+                ServiceCount = b.BookingServices?.Count ?? 0
             }).ToList();
 
-            return Ok(bookingDtos);
+            return Ok(bookingSummaries);
         }
 
         /// <summary>
@@ -206,6 +199,99 @@ namespace Photography_Booking_System.Controllers
             }
 
             return CreatedAtAction("FindBooking", new { id = booking.BookingId }, bookingDto);
+        }
+
+        /// <summary>
+        /// Returns all bookings for a given photographer.
+        /// </summary>
+        /// <example>
+        /// GET http://localhost:7198/api/Bookings/BookingsForPhotographer/7
+        /// </example>
+        /// <param name="photographerId">The ID of the photographer.</param>
+        /// <returns>
+        /// A list of BookingSummaryDTO objects, or 404 if none found.
+        /// </returns>
+        [HttpGet("BookingsForPhotographer/{photographerId}")]
+        public async Task<ActionResult<IEnumerable<BookingSummaryDTO>>> ListBookingsForPhotographer(int photographerId)
+        {
+            var bookings = await _context.Bookings
+                .Where(b => b.PhotographerId == photographerId)
+                .Include(b => b.Client)
+                .Include(b => b.Photographer)
+                .Include(b => b.BookingServices)
+                .ToListAsync();
+
+            if (!bookings.Any())
+                return NotFound($"No bookings found for photographer ID {photographerId}.");
+
+            var bookingSummaries = bookings.Select(b => new BookingSummaryDTO
+            {
+                BookingId = b.BookingId,
+                BookingDate = b.BookingDate,
+                Location = b.Location ?? string.Empty,
+                ClientName = b.Client?.Name ?? "Unknown Client",
+                PhotographerName = b.Photographer?.Name ?? "Unknown Photographer",
+                ServiceCount = b.BookingServices?.Count ?? 0
+            }).ToList();
+
+            return Ok(bookingSummaries);
+        }
+
+        /// <summary>
+        /// Returns all services for a given booking.
+        /// </summary>
+        /// <param name="bookingId">The ID of the booking.</param>
+        /// <returns>A list of ServiceDTO objects or NotFound if booking not found.</returns>
+        [HttpGet("ServicesForBooking/{bookingId}")]
+        public async Task<ActionResult<IEnumerable<ServiceDTO>>> ListServicesForBooking(int bookingId)
+        {
+            var booking = await _context.Bookings
+                .Include(b => b.BookingServices)
+                    .ThenInclude(bs => bs.Service)
+                .FirstOrDefaultAsync(b => b.BookingId == bookingId);
+
+            if (booking == null)
+                return NotFound($"Booking with ID {bookingId} not found.");
+
+            var services = booking.BookingServices.Select(bs => new ServiceDTO
+            {
+                ServiceId = bs.ServiceId,
+                Name = bs.Service.Name,
+                Price = bs.Service.Price
+            }).ToList();
+
+            return Ok(services);
+        }
+
+        /// <summary>
+        /// Returns all bookings linked to a specific service.
+        /// </summary>
+        /// <param name="serviceId">The ID of the service.</param>
+        /// <returns>A list of BookingSummaryDTO objects or NotFound if none found.</returns>
+        [HttpGet("BookingsForService/{serviceId}")]
+        public async Task<ActionResult<IEnumerable<BookingSummaryDTO>>> ListBookingsForService(int serviceId)
+        {
+            var bookings = await _context.Bookings
+                .Include(b => b.Client)
+                .Include(b => b.Photographer)
+                .Include(b => b.BookingServices)
+                .Where(b => b.BookingServices.Any(bs => bs.ServiceId == serviceId))
+                .ToListAsync();
+
+            if (!bookings.Any())
+                return NotFound($"No bookings found for service ID {serviceId}.");
+
+            var bookingSummaries = bookings.Select(b => new BookingSummaryDTO
+            {
+                BookingId = b.BookingId,
+                BookingDate = b.BookingDate,
+                Location = b.Location ?? string.Empty,
+                ClientName = b.Client?.Name ?? "Unknown Client",
+                PhotographerName = b.Photographer?.Name ?? "Unknown Photographer",
+                ServiceCount = b.BookingServices?.Count ?? 0
+            }).ToList();
+
+            return Ok(bookingSummaries);
         }
 
         /// <summary>

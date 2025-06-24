@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Photography_Booking_System</title>
+    <title>@ViewData["Title"] - Photography Booking System</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Photography_Booking_System.styles.css" asp-append-version="true" />
@@ -22,6 +22,38 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Swagger" asp-action="Index">API</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="ClientsPage" asp-action="Index">Clients</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="bookingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Booking
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="bookingDropdown">
+                                <li>
+                                    <a class="dropdown-item" asp-controller="BookingPage" asp-action="Index">All Bookings</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="BookingPage" asp-action="ByService">Bookings By Service</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="BookingPage" asp-action="ByPhotographer">Bookings By Photographer</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Booking_ServicePage" asp-action="Index">Booking Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="ServicesPage" asp-action="Index">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="PhotographersPage" asp-action="Index">Photographers</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
@@ -39,7 +71,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2025 - Photography_Booking_System - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2025 - Photography Booking System - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

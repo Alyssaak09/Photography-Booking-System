@@ -1,0 +1,28 @@
+﻿@model Photography_Booking_System.Models.Booking_Service
+
+@{
+    ViewData["Title"] = "Edit Booking Service";
+}
+
+<h1>Edit Booking Service</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="BookingId" />
+    <input type="hidden" asp-for="ServiceId" />
+
+    <div class="form-group">
+        <label>Booking ID</label>
+        <input class="form-control" value="@Model.BookingId" disabled />
+    </div>
+    <div class="form-group">
+        <label>Service ID</label>
+        <input class="form-control" value="@Model.ServiceId" disabled />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button> |
+    <a asp-action="Index">Back to List</a>
+</form>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

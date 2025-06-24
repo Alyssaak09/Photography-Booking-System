@@ -1,0 +1,56 @@
+﻿@model Photography_Booking_System.Models.ViewModels.BookingFormViewModel
+
+@{
+    ViewData["Title"] = "Edit Booking";
+}
+
+<h2>Edit Booking</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="BookingId" />
+
+    <div class="mb-3">
+        <label asp-for="BookingDate" class="form-label"></label>
+        <input asp-for="BookingDate" class="form-control" type="date" />
+        <span asp-validation-for="BookingDate" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Location" class="form-label"></label>
+        <input asp-for="Location" class="form-control" />
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ClientId" class="form-label">Client</label>
+        <select asp-for="ClientId" asp-items="@(new SelectList(Model.Clients, "ClientId", "Name"))" class="form-select"></select>
+        <span asp-validation-for="ClientId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="PhotographerId" class="form-label">Photographer</label>
+        <select asp-for="PhotographerId" asp-items="@(new SelectList(Model.Photographers, "PhotographerId", "Name"))" class="form-select"></select>
+        <span asp-validation-for="PhotographerId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label>Select Services</label>
+        @foreach (var service in Model.Services)
+        {
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="SelectedServiceIds" value="@service.ServiceId"
+                       @(Model.SelectedServiceIds.Contains(service.ServiceId) ? "checked" : "") />
+                <label class="form-check-label">@service.Name (@service.Price:C)</label>
+            </div>
+        }
+    </div>
+
+    <button type="submit" class="btn btn-success">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
